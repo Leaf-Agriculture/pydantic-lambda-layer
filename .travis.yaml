@@ -1,0 +1,25 @@
+os: "linux"
+
+services:
+  - "docker"
+
+language: "python"
+
+python:
+  - "3.8"
+
+install:
+  - "sudo pip install awscli"
+
+script:
+  - "make layer"
+
+deploy:
+  - provider: "script"
+    script: "bash deploy.sh"
+    edge: "true"
+    on:
+      branch: "master"
+
+after_deploy:
+  - "make clean"
