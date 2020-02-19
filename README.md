@@ -1,0 +1,1 @@
+# Pydantic AWS Lambda layer
