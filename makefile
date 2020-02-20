@@ -16,5 +16,5 @@ clean:
 zip:
 	mkdir -v /tmp/python
 	pip install pydantic -t /tmp/python --compile
-	cd /tmp && zip -r /var/task/layer.zip python
+	cd /tmp && zip -qr /var/task/layer.zip python
 
