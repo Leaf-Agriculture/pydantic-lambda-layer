@@ -1,0 +1,32 @@
+os: "linux"
+
+services:
+  - "docker"
+
+language: "python"
+
+python:
+  - "3.8"
+
+before_script:
+  - "docker pull lambci/lambda:python3.6"
+  - "docker pull lambci/lambda:python3.7"
+  - "docker pull lambci/lambda:python3.8"
+  - "docker pull lambci/lambda:build-python3.8"
+
+script:
+  - "make layer"
+  - "make test"
+
+before_deploy:
+  - "sudo pip install awscli"
+
+deploy:
+  - provider: "script"
+    script: "bash deploy.sh"
+    edge: "true"
+    on:
+      branch: "master"
+
+after_deploy:
+  - "make clean"
